@@ -1,0 +1,168 @@
+# ==========================
+# 🔐 AUTHENTIFIZIERUNG
+# ==========================
+
+## Registrierung
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Max Mustermann",
+  "email": "max@hm.edu",
+  "password": "max123"
+}
+
+## Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "max@hm.edu",
+  "password": "max123"
+}
+
+## Logout
+POST http://localhost:8080/api/auth/logout
+
+# ==========================
+# 👤 BENUTZER
+# ==========================
+
+## Alle Benutzer abrufen
+GET http://localhost:8080/api/users
+
+## Benutzer nach ID abrufen
+GET http://localhost:8080/api/users/1
+
+## Benutzer nach E-Mail abrufen
+GET http://localhost:8080/api/users/email/ben@hm.edu
+
+## Neuen Benutzer erstellen
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "fullName": "Erika Musterfrau",
+  "email": "erika@hm.edu",
+  "password": "pass123",
+  "role": "USER"
+}
+
+## Benutzer aktualisieren
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "fullName": "Moritz Mustermann",
+  "email": "moritz@hm.edu",
+  "password": "pass123",
+  "role": "USER"
+}
+
+## Benutzer löschen
+DELETE http://localhost:8080/api/users/1
+
+# ==========================
+# 📍 STANDORTE
+# ==========================
+
+## Alle Standorte abrufen
+GET http://localhost:8080/api/locations
+
+# ==========================
+# 🗂️ KATEGORIEN
+# ==========================
+
+## Alle Kategorien abrufen
+GET http://localhost:8080/api/categories
+
+# ==========================
+# 🗂️ UNTERKATEGORIEN
+# ==========================
+
+## Alle Unterkategorien abrufen
+GET http://localhost:8080/api/subcategories
+
+## Unterkategorien nach Kategorie-ID abrufen
+GET http://localhost:8080/api/subcategories?categoryId=1
+
+# ==========================
+# 🎽 ARTIKEL
+# ==========================
+
+## Alle Artikel abrufen
+GET http://localhost:8080/api/items
+
+## Artikel mit Filtern abrufen
+GET http://localhost:8080/api/items?locationId=1&searchQuery=jacke
+
+## Artikel nach ID abrufen
+GET http://localhost:8080/api/items/1
+
+## Neuen Artikel erstellen
+POST http://localhost:8080/api/items
+Content-Type: application/json
+
+{
+  "name": "Skihelm",
+  "size": "M",
+  "description": "Schützt den Kopf beim Skifahren",
+  "brand": "Uvex",
+  "locationId": 3,
+  "gender": "UNISEX",
+  "categoryId": 2,
+  "subcategoryId": 6,
+  "zustand": "NEU"
+}
+
+## Artikel aktualisieren
+PUT http://localhost:8080/api/items/1
+Content-Type: application/json
+
+{
+  "name": "Winterjacke",
+  "size": "L",
+  "description": "Jetzt leider nicht verfügbar",
+  "brand": "North Face",
+  "locationId": 1,
+  "gender": "DAMEN",
+  "categoryId": 1,
+  "subcategoryId": 1,
+  "zustand": "GEBRAUCHT"
+}
+
+## Artikel löschen
+DELETE http://localhost:8080/api/items/1
+
+# ==========================
+# 📦 VERMIETUNGEN
+# ==========================
+
+## Alle Vermietungen abrufen
+GET http://localhost:8080/api/rentals
+
+## Vermietungen eines Benutzers abrufen
+GET http://localhost:8080/api/rentals/user/2
+
+## Aktive Vermietungen eines Benutzers abrufen
+GET http://localhost:8080/api/rentals/user/2/active
+
+## Historie der Vermietungen eines Benutzers abrufen
+GET http://localhost:8080/api/rentals/user/2/history
+
+## Artikel vermieten
+POST http://localhost:8080/api/rentals/user/2/rent
+Content-Type: application/json
+
+{
+  "item": {
+    "id": 4
+  },
+  "endDate": "2025-06-10"
+}
+
+## Vermietung verlängern
+POST http://localhost:8080/api/rentals/1/extend
+
+## Artikel zurückgeben
+POST http://localhost:8080/api/rentals/1/return
